@@ -8,8 +8,6 @@ GPD-revised is a repository that originated from the [gpd](https://github.com/at
 
 ```
 gpd-revised
-├── original-gpd
-|   └── ...
 ├── pytorch
 |   ├── train_generator.py
 |   ├── test_generator.py
@@ -20,7 +18,7 @@ gpd-revised
 └── README.md    
 ```
 
-The `original-gpd` folder includes all the codes in the original [gpd](https://github.com/atenpas/gpd) repository, and the `pytorch` folder is the code after modifications that can adapt the new dataset. Here are some specific explanations.
+The `pytorch` folder is the code after modifications that can adapt the new dataset. Here are some specific explanations.
 
 - `train_generator.py` and `test_generator.py` are data generator program, including the selection of the dataset, that is, balance the positive and negative samples;
 - `json_dataset.py` contains the dataset manager, which are vital to our codes. Notice that we have changed the data manager file from `h5` to `json` in order to satisfy the needs of the new dataset;
