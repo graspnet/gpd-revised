@@ -58,6 +58,8 @@ To use our codes to train the net, you may follow the steps listed here.
 - Make some modifications to the `train_generator.py` and `test_generator.py` to satisfy your own path requirements;
 - Run `train_generator.py` and `test_generator.py`;
 - Run `train_net.py`, and if you want to reload the old model and continue the training progress, you can run `continue_train_net.py` instead of the previous one. 
+  - For `train_net.py`, you need to add two more arguments corresponding to the path to the training set and the testing set (the data should be processed by the `train_generator.py` and `test_generator.py`);
+  - For `continue_train_net.py`, besides the two more arguments of the path of the datasets, you need to add one more argument in the end, corresponds to the path to the old model file `*.pwf`.
 
 ### References
 

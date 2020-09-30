@@ -56,9 +56,9 @@ def eval(model, test_loader, device):
 
     return accuracy
 
-if len(sys.argv) < 3:
+if len(sys.argv) < 4:
     print('ERROR: Not enough input arguments!')
-    print('Usage: python train_net3.py pathToTrainingSet.h5')
+    print('Usage: python train_net.py pathToTrainingSet.json pathToTestingSet.json')
     exit(-1)
 
 with open(sys.argv[1], 'r') as db:
