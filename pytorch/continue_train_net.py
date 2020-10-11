@@ -56,7 +56,7 @@ def eval(model, test_loader, device):
 
     return accuracy
 
-if len(sys.argv) < 5:
+if len(sys.argv) < 4:
     print('ERROR: Not enough input arguments!')
     print('Usage: python continue_train_net.py pathToTrainingSet.json pathToTestingSet.json old_model.pwf')
     exit(-1)
@@ -93,7 +93,7 @@ test_loader = torchdata.DataLoader(test_set, batch_size=64, shuffle=True)
 input_channels = 3
 #net = NetCCFFF(input_channels)
 net = Net(input_channels)
-net.load_state_dict(torch.load(sys.argv[4]))
+net.load_state_dict(torch.load(sys.argv[3]))
 print(net)
 
 print('Copying network to GPU ...')
