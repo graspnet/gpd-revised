@@ -93,14 +93,15 @@ test_loader = torchdata.DataLoader(test_set, batch_size=64, shuffle=True)
 input_channels = 3
 #net = NetCCFFF(input_channels)
 net = Net(input_channels)
-net.load_state_dict(torch.load(sys.argv[3]))
-print(net)
 
 print('Copying network to GPU ...')
 if torch.cuda.device_count() > 1:
     print("Let's use", torch.cuda.device_count(), "GPUs.")
     net = nn.DataParallel(net)
 net.to(device)
+
+net.load_state_dict(torch.load(sys.argv[3]))
+print(net)
 
 # Define the loss function and optimizer.
 LR = 0.0001
