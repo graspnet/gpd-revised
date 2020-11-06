@@ -22,12 +22,12 @@ import os
 import time
 import cv2
 
-g = GraspNet('/ssd1/graspnet/', camera='kinect', split='test')
+g = GraspNet('/home/minghao/graspnet/', camera='kinect', split='test')
 
 height = 0.02
 depth_base = 0.02
 grasp_depth = 0.02
-grasp_width = 0.06
+grasp_width = 0.08
 num_sample = 2000
 DUMP_DIR = './dump/'
 sceneIds = g.getSceneIds()
@@ -50,11 +50,11 @@ def flat(nums):
             res.append(i)
     return res
 
-for sceneId in range(100,190):
+for sceneId in range(128,190):
     for i in tqdm(range(256)):
         t1 = time.time()
-        cloud = g.loadScenePointCloud(sceneId, 'kinect', i, remove_outlier=True, align=False, format = 'open3d')
-        fullcloud = g.loadScenePointCloud(sceneId, 'kinect', i, remove_outlier=False, align=False, format = 'open3d')
+        cloud = g.loadScenePointCloud(sceneId, 'kinect', i, align=False, format = 'open3d', use_workspace=True)
+        fullcloud = g.loadScenePointCloud(sceneId, 'kinect', i, align=False, format = 'open3d', use_workspace=True)
         downpc = cloud.voxel_down_sample(voxel_size=0.005)
         sparsepc = cloud.voxel_down_sample(voxel_size=0.03)
         points = np.array(downpc.points).astype(np.float32)
@@ -134,7 +134,7 @@ for sceneId in range(100,190):
         np.savez_compressed(os.path.join(DUMP_DIR,  'scene_'+str(sceneId).zfill(4), str(i%256).zfill(4)+'.npz'), clouds=np.array(sparsepc.points), colors=np.array(sparsepc.colors), preds=np.array(final_grasps))
         print(1111)
 
-ge_k = GraspNetEval(root = '/ssd1/graspnet/', camera = 'kinect', split = 'test')
+ge_k = GraspNetEval(root = '/home/minghao/graspnet/', camera = 'kinect', split = 'test')
 print('Evaluating kinect')
 res, ap = ge_k.eval_all(DUMP_DIR, proc = 24)
 
